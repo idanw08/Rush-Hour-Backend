@@ -47,7 +47,8 @@ let InsertPlayer = async (playerInfo) => {
 			"Gender": playerInfo.Gender,
 			"Education": playerInfo.Education,
 			"ValidationCode": validationCode,
-			"Bonus": "noBonus"
+			"Bonus": -1.00,
+			"Familiarity": -1
 		},
 		ConditionExpression: 'attribute_not_exists(WorkerID)'
 	}
@@ -135,14 +136,27 @@ let getInstanceData = () => {
 	});
 }
 
-let isEmpty = (obj) => {
-    for(var key in obj) {
-        if (obj.hasOwnProperty(key))
-		{
-			return false;
-		}
-    }
-    return true;
+let updatePlayerValue = function(workerID, parameter ,data) {
+	// if (parameter === 'Bonus' && !isFloat(data)){
+	// 	return Promise.reject(new Error('Bonus is not a float!'));
+	// }
+	// if (parameter === 'Familiarity' && (data >= 0 && data <= 5)){
+	// 	return Promise.reject(new Error('Familiarity between 0-5'));
+	// }
+	const params = {
+		TableName: 'Players',
+		Key: { WorkerID: workerID },
+		UpdateExpression: `set ${parameter} = :val`,
+		ExpressionAttributeValues:{ ":val": data },
+		ReturnValues:"UPDATED_NEW"
+	};
+
+	return new Promise((resolve, reject) => {
+		docClient.update(params, (err, data) => {
+			if (err) reject(err);
+			else resolve(data);
+		})
+	});
 }
 
 module.exports = {
@@ -152,8 +166,19 @@ module.exports = {
 	GetQuestions,
 	GetValidationCode,
 	getPlayers,
-	getInstanceData
+	getInstanceData,
+	updatePlayerValue
 };
+
+let isEmpty = (obj) => {
+    for(var key in obj) {
+        if (obj.hasOwnProperty(key))
+		{
+			return false;
+		}
+    }
+    return true;
+}
 
 function CreateQuestionsTable(data) {
 	if (data.TableNames.includes(`Questions`)) { return; }
@@ -219,3 +244,8 @@ function CreatePlayersTable(data) {
 	console.log('Players table created.');
 }
 
+function isFloat(_number) {
+	const number = Number(_number);
+    return parseInt(number, 10) !== number &&
+           parseFloat(number, 10) === number;
+}

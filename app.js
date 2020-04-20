@@ -38,8 +38,9 @@ let verifyInstanceObject = [
 	})
 ];
 
-const verifyValidatinObjects = [
-	check(['WorkerID', 'Code'], 'Not Exist').exists()
+const verifyPlayerParameterUpdate = [
+	check(['Parameter', 'Data'], 'Not Exist').exists(),
+	check('Parameter', 'Invalid Parameter').isIn(['Bonus', 'Familiarity'])
 ];
 
 // TODO: remove this hello world after develop!
@@ -84,7 +85,6 @@ app.post('/players', verifyPlayerObject, async (req, res) => {
 });
 
 // http://localhost:3000/players 
-// TODO: add validation for question
 app.post('/player/instance_data', verifyInstanceObject, async (req, res) => {
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
@@ -143,4 +143,22 @@ app.get('/Validation', async (req, res) => {
 	catch (err) {
 		res.json({ error: err })
 	}
-})
+});
+
+app.put('/player/:WorkerID', verifyPlayerParameterUpdate, async (req, res) => {
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		return res.status(422).json({
+			errors: errors.array()
+		});
+	}
+
+	try {
+		await rushHourDB.updatePlayerValue(req.params.WorkerID, req.body.Parameter, req.body.Data);
+		res.sendStatus(200);
+	} 
+	catch (err) {
+		console.log(err)
+		res.json({ error: err })
+	}
+});

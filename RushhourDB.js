@@ -2,14 +2,18 @@ let AWS = require('aws-sdk');
 let util = require('util');
 let uniqueString = require('unique-string');
 let shortid = require('shortid');
-AWS.config.update({
-	region: "us-west-2",
-	endpoint: "http://localhost:8000"
-});
+// AWS.config.update({
+// 	region: "us-west-2",
+// 	endpoint: "http://localhost:8000"
+// });
 let dynamodb = new AWS.DynamoDB( { apiVersion: '2012-08-10' } );
 let docClient = new AWS.DynamoDB.DocumentClient( { apiVersion: '2012-08-10' } );
 let converter = AWS.DynamoDB.Converter;
 let questionsIDCounter = 0;
+
+AWS.config.update({
+	region: "us-west-2"
+});
 
 let createTableCallback = (err, data) => {
 	if (err) {

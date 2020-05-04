@@ -1,4 +1,5 @@
 let AWS = require('aws-sdk');
+let util = require('util');
 let uniqueString = require('unique-string');
 let shortid = require('shortid');
 AWS.config.update({
@@ -77,7 +78,11 @@ let InsertInstanceData = (instance_data) => {
 	return new Promise((resolve, reject) => {
 		docClient.put(params, (err, data) => {
 			if (err) reject(err);
-			else resolve(data);
+			else {
+				//console.log("Instance data inserted.", params);
+				console.log("Instance data inserted.", util.inspect(params, {depth: null, colors: true}));
+				resolve(data);
+			}
 		})
 	});
 }

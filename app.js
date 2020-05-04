@@ -99,8 +99,7 @@ app.post('/player/instance_data', verifyInstanceObject, async (req, res) => {
 		});
 	}
 	try {
-		const result = await rushHourDB.InsertInstanceData(req.body);	
-		console.log(`Instance data inserted.`, result);
+		await rushHourDB.InsertInstanceData(req.body);	
 		res.sendStatus(201);
 	} 
 	catch (error) {

@@ -1,0 +1,10 @@
+<div *ngIf="toLoadPage" class="content">
+    <div class="left" id="ff">
+        <app-game-instances [stageNumber]="stageNum" (emitTheWinIsTrueEvent)="handleWinIsTrue()">
+        </app-game-instances>
+    </div>
+    <div class="right">
+        <app-game-questions [isWin]="isWin" (emitTheSubmitButton)="handleSubmitClicked()">
+        </app-game-questions>
+    </div>
+</div>

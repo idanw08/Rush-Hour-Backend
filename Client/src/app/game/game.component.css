@@ -1,0 +1,27 @@
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex-flow: row wrap;
+  align-content: flex-end;
+  margin: auto;
+  padding: 10px 10px 10px 10px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  height: auto;
+  width: 95%;
+  min-width: 660px;
+  background: azure;
+}
+.left {
+  margin: auto;
+  margin-top: 10px;
+  width: 640px;
+}
+.right {
+  margin: auto;
+  margin-top: 10px;
+  min-width: fit-content;
+}

@@ -1,0 +1,91 @@
+<div *ngIf="toLoadPage" class="content">
+  <h1>Instructions - Rush-hour</h1>
+  <div *ngIf="frame==0">
+    <h3>In this task you will play a version of the game Rush-hour.</h3>
+    <p>Rush Hour is a sliding block puzzle invented by Nob Yoshigahara in the 1970s.</p>
+    <h2>The Goal of The Game:</h2>
+    <p>
+      The main goal is to get the red car out through the exit of the board by moving the other vehicles out
+      of its way.<br />
+      However, the cars and trucks obstruct the path which makes the puzzle harder.<br />
+    </p>
+    <h2>The Game Board</h2>
+    <p>
+      The game board is a 6x6 grid, including cars and trucks, each colored differently.<br />
+      Both cars and trucks are one square wide, cars are two squares long and trucks are three squares long.
+    </p>
+    <h3>Target Car (red):</h3><img src="assets/redCar.png">
+    <h3>Interference Cars\Trucks (will show in all color but red):</h3><img src="assets/car.png"> <img
+      src="assets/truck.png" style="margin-left: 30px">
+    <h3>Game Board:</h3><img src="assets/field.jpg">
+    <h2>Movement</h2>
+    <p>
+      Any vehicle can only be dragged with the mouse along a straight line on the grid horizontally or vertically there
+      is no way to
+      rotate.
+    </p>
+    <h3>Example puzzle: <mat-error *ngIf="!IsChecked || !IsChecked1 || !IsChecked2">(Do this steps and then click on the checkbox!)</mat-error></h3>      
+
+    <mat-checkbox [(ngModel)]="IsChecked" color="primary">Move car C vertically and then click on the Undo button.
+    </mat-checkbox><br>
+    <mat-checkbox [(ngModel)]="IsChecked1" color="primary">Move car R horizontally and then click on the Undo button.
+    </mat-checkbox><br>
+    <mat-checkbox [(ngModel)]="IsChecked2" color="primary">Move car R horizontally and car C vertically and then click
+      on the Reset button.</mat-checkbox><br>
+    <h3>Solve the example game to move forward.</h3>
+  </div>
+  <div *ngIf="frame==1">
+    <h3>Please rate your familiarity and level of expertise with Rush Hour puzzles, prior to this study:</h3>
+
+    <form [formGroup]="familiarityForm">
+      <input type="radio" name="familiarity" id="0" value="0" formControlName="familiarity"><label for="0"> Absolutely no familiarity</label><br>
+      <input type="radio" name="familiarity" id="1" value="1" formControlName="familiarity"><label for="1"> Minimal familiarity and little to no experience</label><br>
+      <input type="radio" name="familiarity" id="2" value="2" formControlName="familiarity"><label for="2"> Below average level of expertise</label><br>
+      <input type="radio" name="familiarity" id="3" value="3" formControlName="familiarity"><label for="3"> Moderate level of expertise</label><br>
+      <input type="radio" name="familiarity" id="4" value="4" formControlName="familiarity"><label for="4"> Above average level of expertise</label><br>
+      <input type="radio" name="familiarity" id="5" value="5" formControlName="familiarity"><label for="5"> High level of expertise</label><br>
+      <mat-error *ngIf="familiarityForm.invalid">Please rate your familiarity.</mat-error>
+    </form>
+    
+    <h2>Stages and Tasks</h2>
+    <p>Next, you will be asked to solve 3 different Rush Hour puzzles, followed by a “game follow-up questionnaire”,
+      which includes additional questions regarding your performance, and predictions about other participants’
+      performances.</p>
+    <p>A move is an action of moving one vehicle to an adjacent location on the board.</p>
+    <p>A correct solution is a sequence of moves that results in the red car passing through the exit route.</p>
+    <p>An optimal solution: a correct solution with a minimal number of moves.</p>
+    <p>A solution’s quality is determined by its correctness and the number of moves.</p>
+    <p>You will have 10 minutes to solve each Rush Hour puzzle.</p>
+    <p>The game ends when the time limit expires, or if you managed to solve it (the red car passing through the exit
+      route) beforehand.</p>
+    <p>Your final solution is the sequence of moves taken to reach the state of the board at the end of the game.
+    </p>
+    <b>Your performance quality</b> will be assessed based on:
+    <ol>
+      <li>Your final solution quality (including whether or not you have successfully managed to solve the puzzle
+        before
+        the time limit expired).
+      </li>
+      <li>Your answers to the game follow-up questionnaire.
+      </li>
+    </ol>
+    <h2>Bonus</h2>
+    <p>You will have the opportunity to get a bonus based on your performance - if all of your solutions will be in the
+      right range of correctness, you get a bonus of X$.</p>
+    <h2>Buttons:</h2>
+    <h3>Undo</h3>
+    <p>Cancels the last action taken.</p>
+    <h3>Reset</h3>
+    <p>
+      Restores the initial state of the board (the car and the trucks will return to their first position).
+    </p>
+  </div>
+  <div id="gameDiv"></div>
+  <div style="text-align:center;">
+    <button *ngIf="frame==0" [disabled]="frame==0 && (!solved || !IsChecked || !IsChecked1 || !IsChecked2)" mat-raised-button (click)="nextFrame()">Next</button>
+    <button *ngIf="frame==1" mat-raised-button (click)="previousFrame()" style="margin-right: 30px" >Back</button>
+    <button *ngIf="frame==1" [disabled]="familiarityForm.invalid"  mat-raised-button (click)="startQuestionnaire()" style="margin-left: 30px">Start The
+      Questionnaire</button>
+
+  </div>
+</div>

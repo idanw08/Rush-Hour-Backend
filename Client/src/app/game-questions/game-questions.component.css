@@ -1,0 +1,52 @@
+h1 {
+  text-align: center;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 45px;
+  font-weight: bold;
+}
+h2 {
+  font-size: 18px;
+  padding-top: 10px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  text-decoration: underline;
+}
+h3 {
+  font-size: 15px;
+  padding-top: 10px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold
+}
+.content {
+  width: fit-content;
+}
+mat-form-field {
+  width: 500px;
+  margin: 3px 0px 15px 12px;
+}
+button,
+mat-form-field,
+mat-error,
+mat-option,
+mat-select {
+  font-family: "Montserrat", sans-serif;
+}
+button {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.picdiv{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex-flow: row wrap;
+  min-width: fit-content;
+  width: 600px;
+}
+
+.pics{
+  margin: 0px 0px 15px 10px;
+}

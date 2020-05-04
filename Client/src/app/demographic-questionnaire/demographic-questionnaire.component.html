@@ -1,0 +1,61 @@
+<div class="content">
+  <h1> Demographic Questionnaire</h1>
+  <div style="text-align: center;">
+  <form [formGroup]="myForm">
+    <mat-form-field>
+      <input matInput autocomplete="off" placeholder="WorkerID" formControlName="WorkerID">
+      <mat-error *ngIf="WorkerID.touched">
+        Please enter a valid Worker ID.
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" (keydown)="onkeydown($event)" autocomplete="off" placeholder="Age" formControlName="Age">
+      <mat-error *ngIf="Age.touched">
+        Please enter a valid age.
+      </mat-error>
+      <mat-error *ngIf="Age.errors?.min">
+        {{ Age.errors.min.actual }} is too young, minimum age is 18.
+      </mat-error>
+      <mat-error *ngIf="Age.errors?.max">
+        {{ Age.errors.max.actual }} is too old, maximum age is 120.
+      </mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <mat-select placeholder="Gender" formControlName="Gender">
+        <mat-option value="Male">Male</mat-option>
+        <mat-option value="Female">Female</mat-option>
+      </mat-select>
+      <mat-error *ngIf="Gender.touched">
+        Please select your gender.
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Education" formControlName="Education">
+        <mat-option value="Less than High School">Less than High School</mat-option>
+        <mat-option value="High School/GED">High School/GED</mat-option>
+        <mat-option value="College">College</mat-option>
+        <mat-option value="Graduate Degree">Graduate Degree</mat-option>
+      </mat-select>
+      <mat-error *ngIf="Education.touched">
+        Please select your education level.
+      </mat-error>
+    </mat-form-field>
+<!--     <br>
+    <mat-form-field>
+      <mat-select placeholder="Country" formControlName="Country">
+        <mat-option *ngFor="let country of country_list" [value]="country">
+          {{ country }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="Country.touched">
+        Please select your country from the list.
+      </mat-error>
+    </mat-form-field> -->
+  </form>
+</div>
+
+  <div style="text-align: center;">
+    <button mat-raised-button [disabled]="!myForm.valid" (click)="addUser()">Submit</button>
+  </div>
+</div>

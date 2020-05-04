@@ -1,0 +1,30 @@
+h1 {
+  text-align: center;
+  padding-bottom: 20px;
+  padding-top: 10px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 45px;
+  font-weight: bold
+}
+h2 {
+  font-size: 18px;
+  padding-bottom: 20px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+}
+.content {
+  display: block;
+  margin: auto;
+  padding-left: 5%;
+  padding-right: 5%;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  height: auto;
+  width: 60%;
+  background: azure;
+}
+p {
+  font-family: "Montserrat", sans-serif;
+  font-size: 25px;
+  color: blue;
+}

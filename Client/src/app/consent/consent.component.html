@@ -1,0 +1,48 @@
+<div class="content">
+  <h1>Consent</h1>
+  <h3>Please consider this information carefully before deciding whether to accept this task.</h3>
+  <h2>Title of Research:</h2>
+  <p>Intelligent Group Decision Making.</p>
+  <h2>Purpose of Research:</h2>
+  <p>To examine problem solving performance.</p>
+  <h2>What You Will Do:</h2>
+  <p>You will be asked to solve a Rush Hour game problem.</p>
+  <h2>Time Required:</h2>
+  <p>Participation will take approximately 40-50 minutes.</p>
+  <h2>Risks:</h2>
+  <p>There are no anticipated risks associated with participating in this study.<br>
+    The effects of participating should be comparable to those you would experience 
+    from viewing a computer monitor for 40 minutes and using a mouse.</p>
+  <h2>Compensation:</h2>
+  <p>Upon completion of this task, you will receive a code to enter on the Amazon Mechanical Turk task page,<br /> and
+    you will receive the amount that was indicated on the task page.</p>
+  <h2>Confidentiality:</h2>
+  <p>Your participation in this study will remain confidential. Your responses will be assigned a code number.<br />
+    You will NOT be asked to provide your name. You will be asked to provide your age and gender.<br />
+    Throughout the experiment, we may collect data such as browser type, operating system version, mouse movements,
+    and error rates.<br />
+    The records of this study will be kept private.<br />
+    We will delete your Amazon Mechanical Turk Worker ID once we process your task and payment (within 3 days of
+    completing this task).<br />
+    In any sort of report we make public we will not include any information that will make it possible to identify
+    you without your explicit consent.<br />
+    Research records will be kept in a locked file; only the researchers will have access to the records.</p>
+  <h2>Participation And withdrawal:</h2>
+  <p>Your participation in this study is voluntary, and you may withdraw and return the task to Amazon Mechanical
+    Turk at any time.
+    <br />You will receive compensation only if you complete the task. You may withdraw at any time by closing the
+    web page of the task.</p>
+  <h2>Contact:</h2>
+  <p>This study is conducted by researchers at the Ben-Gurion University<br>
+    If you have any questions or concerns about this study, please contact hillash@post.bgu.ac.il.</p>
+
+  <h2>Consent:</h2>
+  <p>I have read the above information and the nature and purpose of this research have been sufficiently explained. I
+    consent to take part in the study.</p>
+
+  <mat-checkbox [(ngModel)]="IsChecked" color="primary">I agree and will participate in this study.</mat-checkbox>
+  <br>
+  <div style="text-align: center;">
+    <button mat-raised-button [disabled]="!IsChecked" (click)="this.agreed()">Continue</button>
+  </div>
+</div>

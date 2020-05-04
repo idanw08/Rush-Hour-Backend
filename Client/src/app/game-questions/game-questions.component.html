@@ -1,0 +1,268 @@
+<div class="content">
+  <h1>Instance Questionnaire</h1>
+  <form [formGroup]="myForm" *ngIf="!toShowForm">
+      <h2 *ngIf="stage==1">First Stage:</h2>
+      <mat-form-field >
+        <mat-select placeholder="How many moves are needed for the optimal solution?" formControlName="q1">
+          <mat-option *ngFor="let ans1 of selectOptions(stage)" [value]="ans1">
+            {{ ans1 }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="q1.touched">
+          Please select a valid car name.
+        </mat-error>
+       </mat-form-field>
+      <br>
+        <mat-form-field>
+          <input matInput type="text" (keydown)="onkeydown($event)" autocomplete="off" maxlength="2" placeholder="How confident are you in your answers?"
+            formControlName="q2">
+            <mat-error *ngIf="q2.touched && !q2.errors?.min && !q2.errors?.max">
+              Please enter a valid number (1-10, 1-not confident, 10-very confident).
+            </mat-error>
+            <mat-error *ngIf="q2.errors?.min">
+              {{ q2.errors.min.actual }} not in the range, Please enter a valid number (1-10, 1-not confident, 10-very confident).
+            </mat-error>
+            <mat-error *ngIf="q2.errors?.max">
+              {{ q2.errors.max.actual }} not in the range, Please enter a valid number (1-10, 1-not confident, 10-very confident).
+            </mat-error>
+            <mat-hint>1-10, 1-not confident, 10-very confident.</mat-hint>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input matInput type="text" (keydown)="onkeydown($event)" autocomplete="off" maxlength="2" placeholder="How difficult was it for you to solve this problem?"
+            formControlName="q3">
+          <mat-error *ngIf="q3.touched && !q3.errors?.min && !q3.errors?.max">
+            Please enter a valid number (1-10, 1-very easy, 10-extremely difficult).
+          </mat-error>
+          <mat-error *ngIf="q3.errors?.min">
+            {{ q3.errors.min.actual }} not in the range, Please enter a valid number (1-10, 1-very easy, 10-extremely difficult).
+          </mat-error>
+          <mat-error *ngIf="q3.errors?.max">
+            {{ q3.errors.max.actual }} not in the range, Please enter a valid number (1-10, 1-very easy, 10-extremely difficult).
+          </mat-error>
+          <mat-hint>1-10, 1-very easy, 10-extremely difficult.</mat-hint>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input matInput type="text" (keydown)="onkeydown($event)" autocomplete="off" maxlength="2" placeholder="In your opinion, how difficult is it for most people to solve this problem?"
+            formControlName="q4">
+          <mat-error *ngIf="q4.touched && !q4.errors?.min && !q4.errors?.max">
+            Please enter a valid number (1-10, 1-very easy, 10-extremely difficult).
+          </mat-error>
+          <mat-error *ngIf="q4.errors?.min">
+            {{ q4.errors.min.actual }} not in the range, Please enter a valid number (1-10, 1-very easy, 10-extremely difficult).
+          </mat-error>
+          <mat-error *ngIf="q4.errors?.max">
+            {{ q4.errors.max.actual }} not in the range, Please enter a valid number (1-10, 1-very easy, 10-extremely difficult).
+          </mat-error>
+          <mat-hint>1-10, 1-very easy, 10-extremely difficult.</mat-hint>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input matInput type="text" id="percent00" (focus)="focusPercent('percent00')" (blur)="blurPercent('percent00')" (keydown)="onkeydown($event)" autocomplete="off" maxlength="3" placeholder="How many responders do you estimate, will select the correct answer?"
+            formControlName="q5">
+          <mat-error *ngIf="q5.touched && !q5.errors?.min && !q5.errors?.max">
+            Please enter a valid number.
+          </mat-error>
+          <mat-error *ngIf="q5.errors?.min">
+            {{ q5.errors.min.actual }} not in the range, Please enter a valid number.
+          </mat-error>
+          <mat-error *ngIf="q5.errors?.max">
+            {{ q5.errors.max.actual }} not in the range, Please enter a valid number.
+          </mat-error>
+          <mat-hint>0%-100%.</mat-hint>
+        </mat-form-field>
+        <br>
+        <h3>How many responders do you estimate will provide the following as<br>
+          the minimum number of moves needed for the optimal solution?<br>
+          (i.e., the first question)
+          <mat-error *ngIf="percentage(0)!=100" style="margin-top:15px">Please fill in all fields so that their sum will be 100.</mat-error>
+        </h3>
+           <mat-form-field style="width: 75px;">
+            <input matInput type="text" id="percent01" (focus)="focusPercent('percent01')" (blur)="blurPercent('percent01')" (keydown)="onkeydown($event)" autocomplete="off" maxlength="3" placeholder="{{ selectOptions(stage)[0] }}"
+              formControlName="q6">
+            <mat-error *ngIf="q6.touched">
+              Please enter a valid percent.
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field style="width: 75px;">
+            <input matInput type="text" id="percent02" (focus)="focusPercent('percent02')" (blur)="blurPercent('percent02')" (keydown)="onkeydown($event)" autocomplete="off" maxlength="3" placeholder="{{ selectOptions(stage)[1] }}"
+              formControlName="q7">
+            <mat-error *ngIf="q7.touched">
+              Please enter a valid percent.
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field style="width: 75px;">
+            <input matInput type="text" id="percent03" (focus)="focusPercent('percent03')" (blur)="blurPercent('percent03')" (keydown)="onkeydown($event)" autocomplete="off" maxlength="3" placeholder="{{ selectOptions(stage)[2] }}"
+              formControlName="q8">
+            <mat-error *ngIf="q8.touched">
+              Please enter a valid percent.
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field style="width: 75px;">
+            <input matInput type="text" id="percent04" (focus)="focusPercent('percent04')" (blur)="blurPercent('percent04')" (keydown)="onkeydown($event)" autocomplete="off" maxlength="3" placeholder="{{ selectOptions(stage)[3] }}"
+              formControlName="q9">
+            <mat-error *ngIf="q9.touched">
+              Please enter a valid percent.
+            </mat-error>
+          </mat-form-field>
+  </form>
+
+  <form [formGroup]="extraForm" *ngIf="toShowForm && stage == 1">
+    <h2>Second Stage:</h2>
+    <h3>
+      The previous puzzle has been altered by adding a new vehicle<br> 
+      (a white car) in a number of different positions.<br>
+      The resulted puzzle boards are depicted in the provided pictures.<br>
+      One of those is now unsolvable.</h3>
+    <mat-form-field >
+      <mat-select placeholder="Which puzzle do you think is now unsolvable?" formControlName="eq1">
+        <mat-option *ngFor="let ans1 of selectOptions(4)" [value]="ans1">
+          {{ ans1 }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="eq1.touched">
+        Please select a valid picture.
+      </mat-error>
+     </mat-form-field>
+    <div class="picdiv">
+      <div class="pics"><label for="car1">A</label><br>
+        <img class="img-responsive" id="car1" width="190" height="190" src="assets\whiteCarProblem\white-car1.JPG">
+      </div>
+      <div class="pics"><label for="car2">B</label><br>
+        <img class="img-responsive" id="car2" width="190" height="190" src="assets\whiteCarProblem\white-car2.JPG">
+      </div>
+      <div class="pics"><label for="car3">C</label><br>
+        <img class="img-responsive" id="car3" width="190" height="190" src="assets\whiteCarProblem\white-car3.JPG">
+      </div>
+      <div class="pics"><label for="car4">D</label><br>
+        <img class="img-responsive" id="car4" width="190" height="190" src="assets\whiteCarProblem\white-car4.JPG">
+      </div>
+      <div class="pics"><label for="car5">E</label><br>
+        <img class="img-responsive" id="car5" width="190" height="190" src="assets\whiteCarProblem\white-car5.JPG">
+      </div>
+      <div class="pics"><label for="car6">F</label><br>
+        <img class="img-responsive" id="car6" width="190" height="190" src="assets\whiteCarProblem\white-car6.JPG">
+      </div>
+    </div>
+    <br>
+      <mat-form-field>
+        <input matInput type="text" (keydown)="onkeydown($event)" autocomplete="off" maxlength="2" placeholder="How confident are you in your answers?"
+          formControlName="eq2">
+          <mat-error *ngIf="eq2.touched && !eq2.errors?.min && !eq2.errors?.max">
+            Please enter a valid number (1-10, 1-not confident, 10-very confident).
+          </mat-error>
+          <mat-error *ngIf="eq2.errors?.min">
+            {{ eq2.errors.min.actual }} not in the range, Please enter a valid number (1-10, 1-not confident, 10-very confident).
+          </mat-error>
+          <mat-error *ngIf="eq2.errors?.max">
+            {{ eq2.errors.max.actual }} not in the range, Please enter a valid number (1-10, 1-not confident, 10-very confident).
+          </mat-error>
+          <mat-hint>1-10, 1-not confident, 10-very confident.</mat-hint>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input matInput type="text" (keydown)="onkeydown($event)" autocomplete="off" maxlength="2" placeholder="How difficult was it for you to solve this problem?"
+          formControlName="eq3">
+        <mat-error *ngIf="eq3.touched && !eq3.errors?.min && !eq3.errors?.max">
+          Please enter a valid number (1-10, 1-very easy, 10-extremely difficult).
+        </mat-error>
+        <mat-error *ngIf="eq3.errors?.min">
+          {{ eq3.errors.min.actual }} not in the range, Please enter a valid number (1-10, 1-very easy, 10-extremely difficult).
+        </mat-error>
+        <mat-error *ngIf="eq3.errors?.max">
+          {{ eq3.errors.max.actual }} not in the range, Please enter a valid number (1-10, 1-very easy, 10-extremely difficult).
+        </mat-error>
+        <mat-hint>1-10, 1-very easy, 10-extremely difficult.</mat-hint>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input matInput type="text" (keydown)="onkeydown($event)" autocomplete="off" maxlength="2" placeholder="In your opinion, how difficult is it for most people to solve this problem?"
+          formControlName="eq4">
+        <mat-error *ngIf="eq4.touched && !eq4.errors?.min && !eq4.errors?.max">
+          Please enter a valid number (1-10, 1-very easy, 10-extremely difficult).
+        </mat-error>
+        <mat-error *ngIf="eq4.errors?.min">
+          {{ eq4.errors.min.actual }} not in the range, Please enter a valid number (1-10, 1-very easy, 10-extremely difficult).
+        </mat-error>
+        <mat-error *ngIf="eq4.errors?.max">
+          {{ eq4.errors.max.actual }} not in the range, Please enter a valid number (1-10, 1-very easy, 10-extremely difficult).
+        </mat-error>
+        <mat-hint>1-10, 1-very easy, 10-extremely difficult.</mat-hint>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input matInput type="text" id="percent" (focus)="focusPercent('percent')" (blur)="blurPercent('percent')" (keydown)="onkeydown($event)" autocomplete="off" maxlength="3" placeholder="How many responders do you estimate, will select the correct answer?"
+          formControlName="eq5">
+        <mat-error *ngIf="eq5.touched && !eq5.errors?.min && !eq5.errors?.max">
+          Please enter a valid number.
+        </mat-error>
+        <mat-error *ngIf="eq5.errors?.min">
+          {{ eq5.errors.min.actual }} not in the range, Please enter a valid number.
+        </mat-error>
+        <mat-error *ngIf="eq5.errors?.max">
+          {{ eq5.errors.max.actual }} not in the range, Please enter a valid number.
+        </mat-error>
+        <mat-hint>0%-100%.</mat-hint>
+      </mat-form-field>
+      <br>
+      <h3>How many responders do you estimate will provide the following as<br>
+        the puzzle that is now unsolvable (i.e., the first question)?
+        <mat-error *ngIf="percentage(1)!=100" style="margin-top:15px">Please fill in all fields so that their sum will be 100.</mat-error>
+      </h3>
+         <mat-form-field style="width: 80px;">
+          <input matInput type="text" id="percent0" (focus)="focusPercent('percent0')" (blur)="blurPercent('percent0')" (keydown)="onkeydown($event)" autocomplete="off" maxlength="3" placeholder="{{ selectOptions(4)[0] }}"
+            formControlName="eq6">
+          <mat-error *ngIf="eq6.touched">
+            Please enter a valid percent.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field style="width: 80px;">
+          <input matInput type="text" id="percent1" (focus)="focusPercent('percent1')" (blur)="blurPercent('percent1')" (keydown)="onkeydown($event)" autocomplete="off" maxlength="3" placeholder="{{ selectOptions(4)[1] }}"
+            formControlName="eq7">
+          <mat-error *ngIf="eq7.touched">
+            Please enter a valid percent.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field style="width: 80px;">
+          <input matInput type="text" id="percent2" (focus)="focusPercent('percent2')" (blur)="blurPercent('percent2')" (keydown)="onkeydown($event)" autocomplete="off" maxlength="3" placeholder="{{ selectOptions(4)[2] }}"
+            formControlName="eq8">
+          <mat-error *ngIf="eq8.touched">
+            Please enter a valid percent.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field style="width: 80px;">
+          <input matInput type="text" id="percent3" (focus)="focusPercent('percent3')" (blur)="blurPercent('percent3')" (keydown)="onkeydown($event)" autocomplete="off" maxlength="3" placeholder="{{ selectOptions(4)[3] }}"
+            formControlName="eq9">
+          <mat-error *ngIf="eq9.touched">
+            Please enter a valid percent.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field style="width: 80px;">
+          <input matInput type="text" id="percent4" (focus)="focusPercent('percent4')" (blur)="blurPercent('percent4')" (keydown)="onkeydown($event)" autocomplete="off" maxlength="3" placeholder="{{ selectOptions(4)[4] }}"
+            formControlName="eq10">
+          <mat-error *ngIf="eq10.touched">
+            Please enter a valid percent.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field style="width: 80px;">
+          <input matInput type="text" id="percent5" (focus)="focusPercent('percent5')" (blur)="blurPercent('percent5')" (keydown)="onkeydown($event)" autocomplete="off" maxlength="3" placeholder="{{ selectOptions(4)[5] }}"
+            formControlName="eq11">
+          <mat-error *ngIf="eq11.touched">
+            Please enter a valid percent.
+          </mat-error>
+        </mat-form-field>
+</form>
+  
+  <div style="text-align: center;">
+    <button *ngIf="!toShowForm" mat-raised-button
+      [disabled]="!myForm.valid || !(percentage(0) == 100) || !isWin"
+      (click)="onSubmitCheck()">Submit</button>
+    
+      
+    <button *ngIf="toShowForm" mat-raised-button 
+      [disabled]="!extraForm.valid || !(percentage(1) == 100)"
+      (click)="onSubmitExtraForm()">Submit</button>
+
+  </div>
+</div>

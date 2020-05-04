@@ -6,15 +6,25 @@ const createError = require('http-errors'); // Create HTTP errors for Express wi
 const path = require('path'); // provides a way of working with directories and file paths.
 const logger = require('morgan'); // used for logging request details
 const { check, validationResult } = require('express-validator');
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const { expressCspHeader, INLINE, NONE, SELF } = require('express-csp-header');
 const app = express();
-const port = 3000;
+const port = 3080;
 
+app.use(expressCspHeader({
+    directives: {
+        'default-src': [SELF],
+		'script-src': [SELF, INLINE, "'unsafe-eval'"],
+        'style-src': [SELF, INLINE, 'https://fonts.googleapis.com', 'https://cdnjs.cloudflare.com'],
+		'font-src': [SELF, 'data:', 'https://fonts.googleapis.com', 'https://fonts.gstatic.com'],
+        'img-src': [SELF, 'data:'],
+        'worker-src': [NONE],
+        'block-all-mixed-content': true
+    }
+}));
 app.use(cors())
 app.use(logger('dev'));
 app.use(bodyparser.json()); // to support JSON-encoded bodies~
-app.use(express.static(path.join(__dirname, 'public'))); // to serve static files of the application
+app.use(express.static(path.join(process.cwd(), "../../Client/rushHourClient/dist/rushHourWebsite/")));
 app.use(bodyparser.urlencoded({
 	extended: true
 }));
@@ -42,10 +52,6 @@ const verifyPlayerParameterUpdate = [
 	check(['Parameter', 'Data'], 'Not Exist').exists(),
 	check('Parameter', 'Invalid Parameter').isIn(['Bonus', 'Familiarity'])
 ];
-
-// TODO: remove this hello world after develop!
-app.get('/', (req, res) => res.send('Hello World!'))
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
 rushHourDB.CreateTables();
 
@@ -162,3 +168,10 @@ app.put('/player/:WorkerID', verifyPlayerParameterUpdate, async (req, res) => {
 		res.json({ error: err })
 	}
 });
+
+app.get('/', (req,res) => {
+	console.log('index.html request')
+	res.sendFile(path.join(process.cwd(), "../../Client/rushHourClient/dist/rushHourWebsite/index.html"))
+});
+
+app.listen(port, () => console.log(`Rush Hour server listening on port ${port}!`))

@@ -170,7 +170,7 @@ app.put('/player/:WorkerID', verifyPlayerParameterUpdate, async (req, res) => {
 
 app.get('/', (req,res) => {
 	console.log('index.html request')
-	res.sendFile(path.join(__dirname, '/Client/dist/rushHourWebsite/index.html'));
+	res.sendFile(path.join(__dirname, 'dist/rushHourWebsite/index.html'));
 });
 
 app.listen(port, () => console.log(`Rush Hour server listening on port ${port}!`))

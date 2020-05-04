@@ -8,7 +8,7 @@ const logger = require('morgan'); // used for logging request details
 const { check, validationResult } = require('express-validator');
 const { expressCspHeader, INLINE, NONE, SELF } = require('express-csp-header');
 const app = express();
-const port = 3080;
+const port = 8081;
 
 app.use(expressCspHeader({
     directives: {
@@ -24,7 +24,7 @@ app.use(expressCspHeader({
 app.use(cors())
 app.use(logger('dev'));
 app.use(bodyparser.json()); // to support JSON-encoded bodies~
-app.use(express.static(__dirname + "/Client/dist/rushHourWebsite/"));
+app.use(express.static(path.join(__dirname, 'dist/rushHourWebsite')));
 app.use(bodyparser.urlencoded({
 	extended: true
 }));
@@ -170,7 +170,7 @@ app.put('/player/:WorkerID', verifyPlayerParameterUpdate, async (req, res) => {
 
 app.get('/', (req,res) => {
 	console.log('index.html request')
-	res.sendFile(__dirname + "/Client/dist/rushHourWebsite/index.html")
+	res.sendFile(path.join(__dirname, '/Client/dist/rushHourWebsite/index.html'));
 });
 
 app.listen(port, () => console.log(`Rush Hour server listening on port ${port}!`))

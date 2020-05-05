@@ -11,7 +11,7 @@ let docClient = new AWS.DynamoDB.DocumentClient( { apiVersion: '2012-08-10' } );
 let converter = AWS.DynamoDB.Converter;
 let questionsIDCounter = 0;
 
-AWS.config.update({
+dynamo.AWS.config.update({
 	region: "us-west-2"
 });
 

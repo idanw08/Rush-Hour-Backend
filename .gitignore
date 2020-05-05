@@ -4,3 +4,4 @@
 .elasticbeanstalk/*.global.yml
 .ebextensions/*
 node_modules/*
+aws_config.js

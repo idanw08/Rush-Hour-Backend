@@ -168,7 +168,7 @@ app.put('/player/:WorkerID', verifyPlayerParameterUpdate, async (req, res) => {
 	}
 });
 
-app.get('/', (req,res) => {
+app.get('*', (req,res) => {
 	console.log('index.html request')
 	res.sendFile(path.join(__dirname, 'Client/dist/rushHourWebsite/index.html'));
 });

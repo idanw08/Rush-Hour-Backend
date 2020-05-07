@@ -360,6 +360,19 @@ export class GameQuestionsComponent implements OnInit {
       return (parseInt(this.eq6.value) + parseInt(this.eq7.value) + parseInt(this.eq8.value) + parseInt(this.eq9.value) + parseInt(this.eq10.value) + parseInt(this.eq11.value));
   }
 
+  percentageLeft(form) {
+    if (form == 0){
+      let left =  100 - (parseInt(this.q6.value) + parseInt(this.q7.value) + parseInt(this.q8.value) + parseInt(this.q9.value));
+      if(left>0) return "You left " + left + "% to divide."
+      if(left<0) return "Get rid of " + (-left) + "%."
+    }
+    if (form == 1){
+      let left = 100 - (parseInt(this.eq6.value) + parseInt(this.eq7.value) + parseInt(this.eq8.value) + parseInt(this.eq9.value) + parseInt(this.eq10.value) + parseInt(this.eq11.value));
+      if(left>0) return "You left " + left + "% to divide."
+      if(left<0) return "Get rid of " + (-left) + "%."
+    }
+  }
+
   onkeydown(e) {
     if (!((e.keyCode > 95 && e.keyCode < 106) || (e.keyCode > 47 && e.keyCode < 58) || e.keyCode == 8 || e.keyCode == 9)) {
       return false;

@@ -5,7 +5,7 @@
     <p>Rush Hour is a sliding block puzzle invented by Nob Yoshigahara in the 1970s.</p>
     <h2>The Goal of The Game:</h2>
     <p>
-      The main goal is to get the red car out through the exit of the board by moving the other vehicles out
+      The main goal is to get the <b>Red</b> car out through the exit of the board by moving the other vehicles out
       of its way.<br />
       However, the cars and trucks obstruct the path which makes the puzzle harder.<br />
     </p>
@@ -32,7 +32,8 @@
     </mat-checkbox><br>
     <mat-checkbox [(ngModel)]="IsChecked2" color="primary">Move car R horizontally and car C vertically and then click
       on the Reset button.</mat-checkbox><br>
-    <h3>Solve the example game to move forward.</h3>
+    <h3>Solve the example game to move forward (Remind that you need to get the <b>Red</b> car out through the exit of the board by moving the other vehicles out
+      of its way).</h3>
   </div>
   <div *ngIf="frame==1">
     <h3>Please rate your familiarity and level of expertise with Rush Hour puzzles, prior to this study:</h3>
@@ -52,8 +53,8 @@
       which includes additional questions regarding your performance, and predictions about other participants’
       performances.</p>
     <p>A move is an action of moving one vehicle to an adjacent location on the board.</p>
-    <p>A correct solution is a sequence of moves that results in the red car passing through the exit route.</p>
-    <p>An optimal solution: a correct solution with a minimal number of moves.</p>
+    <p>A <b>correct</b> solution is a sequence of moves that results in the red car passing through the exit route.</p>
+    <p>An <b>optimal</b> solution: a correct solution with a minimal number of moves.</p>
     <p>A solution’s quality is determined by its correctness and the number of moves.</p>
     <p>You will have 10 minutes to solve each Rush Hour puzzle.</p>
     <p>The game ends when the time limit expires, or if you managed to solve it (the red car passing through the exit
@@ -82,7 +83,9 @@
   </div>
   <div id="gameDiv"></div>
   <div style="text-align:center;">
+    <mat-error *ngIf="frame==0 && !solved">Solve the example game to move forward!<br></mat-error>
     <button *ngIf="frame==0" [disabled]="frame==0 && (!solved || !IsChecked || !IsChecked1 || !IsChecked2)" mat-raised-button (click)="nextFrame()">Next</button>
+    <mat-error *ngIf="frame==1 && familiarityForm.invalid">Please rate your familiarity.<br></mat-error>
     <button *ngIf="frame==1" mat-raised-button (click)="previousFrame()" style="margin-right: 30px" >Back</button>
     <button *ngIf="frame==1" [disabled]="familiarityForm.invalid"  mat-raised-button (click)="startQuestionnaire()" style="margin-left: 30px">Start The
       Questionnaire</button>

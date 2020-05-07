@@ -1,7 +1,10 @@
 <div class="content">
-  <h1>Instance Questionnaire</h1>
+  <h1>Instance Questionnaire {{ this.stage }} </h1>
   <form [formGroup]="myForm" *ngIf="!toShowForm">
       <h2 *ngIf="stage==1">First Stage:</h2>
+      <h3>In this stage you should solve the game and answer the questionnaire.</h3>
+      <h3>You can see the number of moves you made in your solution in the <br>
+         top left corner of the game.</h3>
       <mat-form-field >
         <mat-select placeholder="How many moves are needed for the optimal solution?" formControlName="q1">
           <mat-option *ngFor="let ans1 of selectOptions(stage)" [value]="ans1">
@@ -9,7 +12,7 @@
           </mat-option>
         </mat-select>
         <mat-error *ngIf="q1.touched">
-          Please select a valid car name.
+          Please select answer.
         </mat-error>
        </mat-form-field>
       <br>
@@ -76,7 +79,9 @@
         <h3>How many responders do you estimate will provide the following as<br>
           the minimum number of moves needed for the optimal solution?<br>
           (i.e., the first question)
-          <mat-error *ngIf="percentage(0)!=100" style="margin-top:15px">Please fill in all fields so that their sum will be 100.</mat-error>
+          <mat-error *ngIf="percentage(0)!=100" style="margin-top:15px">Please fill in all fields so that their sum will be 100.<br>
+            {{percentageLeft(0)}}
+          </mat-error>
         </h3>
            <mat-form-field style="width: 75px;">
             <input matInput type="text" id="percent01" (focus)="focusPercent('percent01')" (blur)="blurPercent('percent01')" (keydown)="onkeydown($event)" autocomplete="off" maxlength="3" placeholder="{{ selectOptions(stage)[0] }}"
@@ -208,7 +213,9 @@
       <br>
       <h3>How many responders do you estimate will provide the following as<br>
         the puzzle that is now unsolvable (i.e., the first question)?
-        <mat-error *ngIf="percentage(1)!=100" style="margin-top:15px">Please fill in all fields so that their sum will be 100.</mat-error>
+        <mat-error *ngIf="percentage(1)!=100" style="margin-top:15px">Please fill in all fields so that their sum will be 100.<br>
+        {{percentageLeft(1)}}
+        </mat-error>
       </h3>
          <mat-form-field style="width: 80px;">
           <input matInput type="text" id="percent0" (focus)="focusPercent('percent0')" (blur)="blurPercent('percent0')" (keydown)="onkeydown($event)" autocomplete="off" maxlength="3" placeholder="{{ selectOptions(4)[0] }}"

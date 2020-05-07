@@ -1,4 +1,7 @@
 let AWS = require('aws-sdk');
+AWS.config.update({
+	region: "us-west-2"
+});
 let util = require('util');
 let uniqueString = require('unique-string');
 let shortid = require('shortid');
@@ -10,9 +13,6 @@ let questionsIDCounter = 0;
 // AWS.config.update({
 // 	region: "us-west-2",
 // 	endpoint: "http://localhost:8000"
-// });
-// AWS.config.update({
-// 	region: "us-west-2"
 // });
 
 let createTableCallback = (err, data) => {
@@ -83,7 +83,6 @@ let InsertInstanceData = (instance_data) => {
 		docClient.put(params, (err, data) => {
 			if (err) reject(err);
 			else {
-				//console.log("Instance data inserted.", params);
 				console.log("Instance data inserted.", util.inspect(params, {depth: null, colors: true}));
 				resolve(data);
 			}
@@ -146,12 +145,6 @@ let getInstanceData = () => {
 }
 
 let updatePlayerValue = function(workerID, parameter ,data) {
-	// if (parameter === 'Bonus' && !isFloat(data)){
-	// 	return Promise.reject(new Error('Bonus is not a float!'));
-	// }
-	// if (parameter === 'Familiarity' && (data >= 0 && data <= 5)){
-	// 	return Promise.reject(new Error('Familiarity between 0-5'));
-	// }
 	const params = {
 		TableName: 'Players',
 		Key: { WorkerID: workerID },

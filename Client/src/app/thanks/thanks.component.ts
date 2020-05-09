@@ -40,7 +40,7 @@ export class ThanksComponent implements OnInit {
       "Parameter": "Bonus",
       "Data": workerBonus
     }
-    //console.log("updateWorkerBonus" + JSON.stringify(data))//TO DELETE
+    console.log("updateWorkerBonus" + JSON.stringify(data))//TO DELETE
     this.http.put<any>(this.dataService.apiUrl + "player/" + this.workerId, JSON.stringify(data), this.httpOptions)
     .subscribe(data => { 
       //console.log("PUT Request is successful ", data); 

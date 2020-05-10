@@ -452,7 +452,7 @@ export class GameState extends Phaser.State {
     render() {
         if(this.gameLevel == 'example'){
             this.timeText.setText("Time Remaining: 10:00");
-            this.carMovesText.setText("First 4 Cars Moved: " + this.carMoved, 50, 40);
+            this.carMovesText.setText("Number of Moves: " + this.moves, 50, 40);
             return;
         }
         if (this.timeLeft > 0) {
@@ -676,15 +676,28 @@ export class GameState extends Phaser.State {
         if(this.gameLevel == 'example')
             return 0;
         else if(this.gameLevel == 'easy'){
-            if(this.moves<20) this.bonus+=0.5;
-            if(this.carMoved == "A, B, C, D")this.bonus += 0.5 ;
+            let x = 0;
+            if(this.moves == 8) x += 100;
+            else if(this.moves == 9) x += 50;
+            x += (100 * ( 1 / Number(this.game.time.totalElapsedSeconds().toFixed(2)) ));
+            this.bonus += parseFloat((x*0.2).toFixed(2))
             return;
         }
         else if(this.gameLevel == 'medium'){
-            this.bonus+=0.7
+            let x = 0;
+            if(this.moves == 15) x += 100;
+            else if(this.moves == 16) x += 50;
+            x += (100 * ( 1 / Number(this.game.time.totalElapsedSeconds().toFixed(2)) ));
+            this.bonus += parseFloat((x*0.35).toFixed(2))
+            return;
         }
         else if(this.gameLevel == 'hard'){
-            this.bonus+=1.2
+            let x = 0;
+            if(this.moves == 18) x += 100;
+            else if(this.moves == 19) x += 50;
+            x += (100 * ( 1 / Number(this.game.time.totalElapsedSeconds().toFixed(2)) ));
+            this.bonus += parseFloat((x*0.45).toFixed(2))
+            return;
         }
     }
 

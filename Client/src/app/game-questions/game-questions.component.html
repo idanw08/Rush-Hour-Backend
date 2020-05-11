@@ -1,6 +1,7 @@
 <div class="content">
   <h1>Instance Questionnaire {{ this.stage }} </h1>
-  <form [formGroup]="myForm" *ngIf="!toShowForm">
+  <h3 *ngIf="!isWin">Try to solve the game with minimum number of moves</h3>
+  <form [formGroup]="myForm" *ngIf="!toShowForm && isWin" >
       <h2 *ngIf="stage==1">First Stage:</h2>
       <h3>In this stage you should solve the game and answer the questionnaire.</h3>
       <h3>You can see the number of moves you made in your solution in the <br>
@@ -262,7 +263,7 @@
 </form>
   
   <div style="text-align: center;">
-    <button *ngIf="!toShowForm" mat-raised-button
+    <button *ngIf="!toShowForm && isWin" mat-raised-button
       [disabled]="!myForm.valid || !(percentage(0) == 100) || !isWin"
       (click)="onSubmitCheck()">Submit</button>
     

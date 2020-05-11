@@ -44,7 +44,7 @@ let verifyInstanceObject = [
 	check(['WorkerID', 'InstanceIndex', 'Log', 'QnsAns'], 'Not Exist').exists(),
 	check('InstanceIndex').isInt({
 		min: 1,
-		max: 3
+		max: 4
 	})
 ];
 

@@ -84,48 +84,58 @@
             {{percentageLeft(0)}}
           </mat-error>
         </h3>
-           <mat-form-field style="width: 75px;">
-            <input matInput type="text" id="percent01" (focus)="focusPercent('percent01')" (blur)="blurPercent('percent01')" (keydown)="onkeydown($event)" autocomplete="off" maxlength="3" placeholder="{{ selectOptions(stage)[0] }}"
+        <div>
+          <mat-form-field style="width: 164px;">
+            <input matInput type="text" id="percent01" (focus)="focusPercent('percent01')" (blur)="blurPercent('percent01')"
+              (keydown)="onkeydown($event)" autocomplete="off" maxlength="3" placeholder="{{ selectOptions(stage)[0] }}"
               formControlName="q6">
             <mat-error *ngIf="q6.touched">
               Please enter a valid percent.
             </mat-error>
           </mat-form-field>
-          <mat-form-field style="width: 75px;">
-            <input matInput type="text" id="percent02" (focus)="focusPercent('percent02')" (blur)="blurPercent('percent02')" (keydown)="onkeydown($event)" autocomplete="off" maxlength="3" placeholder="{{ selectOptions(stage)[1] }}"
+          <mat-form-field style="width: 140px;">
+            <input matInput type="text" id="percent02" (focus)="focusPercent('percent02')" (blur)="blurPercent('percent02')"
+              (keydown)="onkeydown($event)" autocomplete="off" maxlength="3" placeholder="{{ selectOptions(stage)[1] }}"
               formControlName="q7">
             <mat-error *ngIf="q7.touched">
               Please enter a valid percent.
             </mat-error>
           </mat-form-field>
-          <mat-form-field style="width: 75px;">
-            <input matInput type="text" id="percent03" (focus)="focusPercent('percent03')" (blur)="blurPercent('percent03')" (keydown)="onkeydown($event)" autocomplete="off" maxlength="3" placeholder="{{ selectOptions(stage)[2] }}"
+          <mat-form-field style="width: 140px;">
+            <input matInput type="text" id="percent03" (focus)="focusPercent('percent03')" (blur)="blurPercent('percent03')"
+              (keydown)="onkeydown($event)" autocomplete="off" maxlength="3" placeholder="{{ selectOptions(stage)[2] }}"
               formControlName="q8">
             <mat-error *ngIf="q8.touched">
               Please enter a valid percent.
             </mat-error>
           </mat-form-field>
-          <mat-form-field style="width: 75px;">
-            <input matInput type="text" id="percent04" (focus)="focusPercent('percent04')" (blur)="blurPercent('percent04')" (keydown)="onkeydown($event)" autocomplete="off" maxlength="3" placeholder="{{ selectOptions(stage)[3] }}"
+        </div>
+        <div>
+          <mat-form-field style="width: 140px;">
+            <input matInput type="text" id="percent04" (focus)="focusPercent('percent04')" (blur)="blurPercent('percent04')"
+              (keydown)="onkeydown($event)" autocomplete="off" maxlength="3" placeholder="{{ selectOptions(stage)[3] }}"
               formControlName="q9">
             <mat-error *ngIf="q9.touched">
               Please enter a valid percent.
             </mat-error>
           </mat-form-field>
-          <mat-form-field style="width: 75px;">
-            <input matInput type="text" id="percent05" (focus)="focusPercent('percent05')" (blur)="blurPercent('percent05')" (keydown)="onkeydown($event)" autocomplete="off" maxlength="3" placeholder="{{ selectOptions(stage)[4] }}"
+          <mat-form-field style="width: 140px;">
+            <input matInput type="text" id="percent05" (focus)="focusPercent('percent05')" (blur)="blurPercent('percent05')"
+              (keydown)="onkeydown($event)" autocomplete="off" maxlength="3" placeholder="{{ selectOptions(stage)[4] }}"
               formControlName="q10">
             <mat-error *ngIf="q10.touched">
               Please enter a valid percent.
             </mat-error>
           </mat-form-field>
-          <mat-form-field style="width: 75px;">
-            <input matInput type="text" id="percent06" (focus)="focusPercent('percent06')" (blur)="blurPercent('percent06')" (keydown)="onkeydown($event)" autocomplete="off" maxlength="3" placeholder="{{ selectOptions(stage)[5] }}"
+          <mat-form-field style="width: 164px;">
+            <input matInput type="text" id="percent06" (focus)="focusPercent('percent06')" (blur)="blurPercent('percent06')"
+              (keydown)="onkeydown($event)" autocomplete="off" maxlength="3" placeholder="{{ selectOptions(stage)[5] }}"
               formControlName="q11">
             <mat-error *ngIf="q11.touched">
               Please enter a valid percent.
             </mat-error>
           </mat-form-field>
+        </div>
   </form>
 
   <form [formGroup]="extraForm" *ngIf="toShowForm && stage == 1">

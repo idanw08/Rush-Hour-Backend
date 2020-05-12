@@ -435,7 +435,7 @@ export class GameState extends Phaser.State {
             }
         }
         this.resetBtn = this.add.button(this.world.centerX + 50, 0, 'resetButton', this.Reset);
-        this.undoBtn = this.add.button(this.world.centerX + 170, 0, 'undoButton', this.Undo);
+        this.undoBtn = this.add.button(this.world.centerX + 170, 0, 'undoButton', this.UndoBtn);
         this.timeText = this.add.text(50, 2, "", {
             font: "20px Comic Sans MS",
             fill: "white",
@@ -630,7 +630,9 @@ export class GameState extends Phaser.State {
         //this.moves = 0;
         //this.firstCarsMoves();
     }
-
+    private UndoBtn = () => {
+        this.Undo(false);
+    }
     private Undo = (rst:boolean) => {
         if (this.gameStack.length == 0)
             return;

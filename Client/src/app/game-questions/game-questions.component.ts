@@ -244,8 +244,8 @@ export class GameQuestionsComponent implements OnInit {
     else {
       document.getElementById("ff").style.display = "none";
       window.scroll(0, 0);
-      this.toShowForm = true;}
-
+      this.toShowForm = true;
+    }
   }
 
   async onSubmitExtraForm(){

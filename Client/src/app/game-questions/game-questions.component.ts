@@ -71,7 +71,7 @@ export class GameQuestionsComponent implements OnInit {
         Validators.required,
         Validators.max(100),
         Validators.min(0),
-      ]]/* ,
+      ]],
       q10: ['', [
         Validators.required,
         Validators.max(100),
@@ -81,12 +81,7 @@ export class GameQuestionsComponent implements OnInit {
         Validators.required,
         Validators.max(100),
         Validators.min(0),
-      ]],
-      q12: ['', [
-        Validators.required,
-        Validators.max(100),
-        Validators.min(0),
-      ]] */
+      ]]
     });
     this.extraForm = this.fb.group({
       eq1: ['', [
@@ -181,6 +176,14 @@ export class GameQuestionsComponent implements OnInit {
     return this.myForm.get('q9');
   }
 
+  get q10() {
+    return this.myForm.get('q10');
+  }
+
+  get q11() {
+    return this.myForm.get('q11');
+  }
+  
   get eq1() {
     return this.extraForm.get('eq1');
   }
@@ -240,6 +243,7 @@ export class GameQuestionsComponent implements OnInit {
     }
     else {
       document.getElementById("ff").style.display = "none";
+      window.scroll(0, 0);
       this.toShowForm = true;}
 
   }
@@ -330,39 +334,27 @@ export class GameQuestionsComponent implements OnInit {
   selectOptions(stage: number){
     let stringOptions: string;
     if (stage == 1) {
-      stringOptions = "7 moves,8 moves,9 moves,10 moves";
+      stringOptions = "Less then 7 moves,7 moves,8 moves,9 moves,10 moves,More then 10 moves";
     } else if (stage == 2) {
-      stringOptions = "13 moves,14 moves,15 moves,16 moves";
+      stringOptions = "Less then 13 moves,13 moves,14 moves,15 moves,16 moves,More then 16 moves";
     } else if (stage == 3) {
-      stringOptions = "17 moves,18 moves,19 moves,20 moves";
+      stringOptions = "Less then 17 moves,17 moves,18 moves,19 moves,20 moves,More then 20 moves";
     } else if (stage == 4){
       stringOptions = "Picture A,Picture B,Picture C,Picture D,Picture E,Picture F";
     }
     return stringOptions.split(",");
   }
 
-/*   selectOption(stage: number) {
-    let stringOptions: string;
-    if (stage == 1) {
-      stringOptions = "7 steps,8 steps,9 steps,10 steps";
-    } else if (stage == 2) {
-      stringOptions = "10 steps,11 steps,12 steps,13 steps";
-    } else {
-      stringOptions = "14 steps,15 steps,16 steps,17 steps";
-    }
-    return (stringOptions).split(",");
-  } */
-
   percentage(form) {
     if (form == 0)
-      return (parseInt(this.q6.value) + parseInt(this.q7.value) + parseInt(this.q8.value) + parseInt(this.q9.value));
+      return (parseInt(this.q6.value) + parseInt(this.q7.value) + parseInt(this.q8.value) + parseInt(this.q9.value) + parseInt(this.q10.value) + parseInt(this.q11.value));
     if (form == 1)
       return (parseInt(this.eq6.value) + parseInt(this.eq7.value) + parseInt(this.eq8.value) + parseInt(this.eq9.value) + parseInt(this.eq10.value) + parseInt(this.eq11.value));
   }
 
   percentageLeft(form) {
     if (form == 0){
-      let left =  100 - (parseInt(this.q6.value) + parseInt(this.q7.value) + parseInt(this.q8.value) + parseInt(this.q9.value));
+      let left =  100 - (parseInt(this.q6.value) + parseInt(this.q7.value) + parseInt(this.q8.value) + parseInt(this.q9.value) + parseInt(this.q10.value) + parseInt(this.q11.value));
       if(left>0) return "You left " + left + "% to divide."
       if(left<0) return "Get rid of " + (-left) + "%."
     }

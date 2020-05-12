@@ -112,6 +112,20 @@
               Please enter a valid percent.
             </mat-error>
           </mat-form-field>
+          <mat-form-field style="width: 75px;">
+            <input matInput type="text" id="percent05" (focus)="focusPercent('percent05')" (blur)="blurPercent('percent05')" (keydown)="onkeydown($event)" autocomplete="off" maxlength="3" placeholder="{{ selectOptions(stage)[4] }}"
+              formControlName="q10">
+            <mat-error *ngIf="q10.touched">
+              Please enter a valid percent.
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field style="width: 75px;">
+            <input matInput type="text" id="percent06" (focus)="focusPercent('percent06')" (blur)="blurPercent('percent06')" (keydown)="onkeydown($event)" autocomplete="off" maxlength="3" placeholder="{{ selectOptions(stage)[5] }}"
+              formControlName="q11">
+            <mat-error *ngIf="q11.touched">
+              Please enter a valid percent.
+            </mat-error>
+          </mat-form-field>
   </form>
 
   <form [formGroup]="extraForm" *ngIf="toShowForm && stage == 1">

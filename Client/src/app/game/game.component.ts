@@ -86,6 +86,14 @@ export class GameComponent implements OnInit {
         {
           Question: "Q9",
           Answer: parseInt(ans.q9)
+        },
+        {
+          Question: "Q10",
+          Answer: parseInt(ans.q10)
+        },
+        {
+          Question: "Q11",
+          Answer: parseInt(ans.q11)
         }
       ]
     }

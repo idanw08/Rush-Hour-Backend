@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DataServiceService } from '../data-service/data-service.service';
+import { WorkerIDValidator } from './workerID.validator'
 
 import countryP from 'country-list';
 import { Router } from '@angular/router';
@@ -26,7 +27,8 @@ export class DemographicQuestionnaireComponent implements OnInit {
     window.scroll(0,0);
     this.myForm = this.fb.group({
       WorkerID: ['', [
-        Validators.required
+        Validators.required,
+        WorkerIDValidator.cannotContainSpace
       ]],
       Age: [null, [
         Validators.required,

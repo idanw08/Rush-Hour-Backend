@@ -3,9 +3,12 @@
   <div style="text-align: center;">
   <form [formGroup]="myForm">
     <mat-form-field>
-      <input matInput autocomplete="off" placeholder="WorkerID" formControlName="WorkerID">
+      <input matInput type="text" autocomplete="off" placeholder="WorkerID" formControlName="WorkerID">
       <mat-error *ngIf="WorkerID.touched">
         Please enter a valid Worker ID.
+      </mat-error>
+      <mat-error *ngIf="WorkerID.errors?.cannotContainSpace">
+        Worker ID cannot contain whitespaces.
       </mat-error>
     </mat-form-field>
     <mat-form-field>
